@@ -2,11 +2,11 @@
 
 Comment on the matching GitHub issue to claim one.
 
-Difficulty: 🟢 gentle · 🟡 straightforward code · 🔴 needs some thought or a conversation
+Difficulty: [Easy] gentle · [Medium] straightforward code · [Hard] needs some thought or a conversation
 
 ---
 
-### 1. 🟢 Format numbers as they are typed
+### 1. [Easy] Format numbers as they are typed
 
 **Problem.** Entering `1200000` gives no feedback until you reach the result. It is
 genuinely easy to type one zero too many and not notice, and the whole answer is then
@@ -22,7 +22,7 @@ end of the input. Test editing the middle of a number.
 
 ---
 
-### 2. 🟢 Explain what counts and what does not
+### 2. [Easy] Explain what counts and what does not
 
 **Problem.** The hints are one line each. "Stock for resale" and "money owed to you"
 genuinely confuse people, and a student unsure whether something counts will guess.
@@ -35,7 +35,7 @@ differ on belongs in an issue first.
 
 ---
 
-### 3. 🟡 A printable summary
+### 3. [Medium] A printable summary
 
 **Problem.** The app insists the student should check the result with someone
 qualified, and then gives them no way to take the working with them.
@@ -47,7 +47,7 @@ the nisab basis and price used, and the result — enough for somebody else to c
 
 ---
 
-### 4. 🟡 Remember the metal price between visits
+### 4. [Medium] Remember the metal price between visits
 
 **Problem.** The silver price has to be looked up and retyped every single time, which
 is exactly the friction the project exists to remove.
@@ -62,7 +62,7 @@ store asset figures; those stay in the session only.
 
 ---
 
-### 5. 🟡 A hawl reminder
+### 5. [Medium] A hawl reminder
 
 **Problem.** Zakat is due on wealth held for a full lunar year, and the app says so in
 small print while doing nothing about it. Knowing *when* your year turns is half the
@@ -76,7 +76,7 @@ function with tests, and no library if you can manage it.
 
 ---
 
-### 6. 🟢 Translate the interface
+### 6. [Easy] Translate the interface
 
 **Problem.** English only. This is material plenty of students would rather read in
 Yoruba or Hausa, and the vocabulary is not everyday English in any of them.
@@ -89,7 +89,7 @@ matter more than in ordinary UI copy.
 
 ---
 
-### 7. 🔴 Zakat on gold jewellery
+### 7. [Hard] Zakat on gold jewellery
 
 **Problem.** The app has one "gold and silver" field taking a cash value. In practice
 the live question for a lot of families is whether jewellery in regular personal use is
@@ -102,7 +102,7 @@ that presents the choice without taking a side. **Discussion before code.**
 
 ---
 
-### 8. 🟡 Round the result sensibly, and upward
+### 8. [Medium] Round the result sensibly, and upward
 
 **Problem.** The result shows exact naira — `₦32,500`, but also `₦32,487`. Many people
 prefer to round zakat up to be safe.
@@ -114,7 +114,7 @@ giving *more* than calculated, never less. Show both figures.
 
 ---
 
-### 9. 🟡 Make the monthly plan cover a term, not a month
+### 9. [Medium] Make the monthly plan cover a term, not a month
 
 **Problem.** Student money does not arrive monthly. It arrives in lumps at the start of
 a term and has to last until the next one, which is the actual budgeting problem and
@@ -127,7 +127,7 @@ the daily figure on that instead of the calendar month.
 
 ---
 
-### 10. 🟢 Check the whole app with a screen reader
+### 10. [Easy] Check the whole app with a screen reader
 
 **Problem.** The `Field` component was fixed after a screen reader announced one input
 as "CashIn hand, current account, mobile money₦". Nobody has checked the rest — the
