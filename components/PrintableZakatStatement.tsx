@@ -1,3 +1,4 @@
+import React from "react";
 import { NISAB_GOLD_GRAMS, NISAB_SILVER_GRAMS, ZAKAT_RATE, ZAKAT_RATE_SOLAR_YEAR, type NisabBasis, type ZakatResult } from "@/lib/zakat";
 import { formatMoney } from "@/lib/money";
 import type { Aggregation } from "@/lib/sources/aggregate";
