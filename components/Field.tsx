@@ -42,7 +42,7 @@ export function Field({
           {hint}
         </p>
       )}
-      <div className="mt-1 flex items-center gap-1 rounded border border-[var(--color-rule)] px-2 focus-within:border-[var(--color-brand)]">
+      <div className="mt-1.5 flex items-center gap-1.5 rounded-xl border border-[var(--color-rule)] bg-[var(--surface)] px-3 transition-[border-color,box-shadow] duration-200 ease-[var(--ease-house)] focus-within:border-[var(--color-brand)] focus-within:ring-2 focus-within:ring-[var(--color-brand)]/15">
         {prefix && (
           <span aria-hidden className="text-sm text-[var(--color-ink-soft)]">
             {prefix}
@@ -58,7 +58,7 @@ export function Field({
           // values containing commas — and people do paste "1,200,000"
           // straight out of their bank app.
           inputMode="decimal"
-          className="w-full bg-transparent py-1.5 text-sm tabular-nums outline-none"
+          className="w-full bg-transparent py-2.5 text-sm font-mono-nums tabular-nums outline-none"
         />
         {suffix && (
           <span className="shrink-0 text-xs text-[var(--color-ink-soft)]">{suffix}</span>

@@ -30,6 +30,13 @@ month — which is nothing. Giving that is planned last is giving that never hap
 - **Monthly plan** — splits an allowance with sadaqah and savings taken out *at the
   same time as fixed costs*, then gives you a daily figure for what is left of the
   month based on what you have already spent.
+- **Several accounts at once** — drop in statements from as many banks as you like
+  (CSV, OFX, QFX, QIF or JSON), add crypto holdings, and the totals come out per
+  account with the working shown. Files are read in the browser and never uploaded.
+  It notices the same statement imported twice, and it will not present a month's net
+  flow as if it were a balance.
+- **Installable** — add it to your home screen and it opens without a connection. The
+  arithmetic never needed one.
 
 ## What it is not
 
@@ -84,12 +91,47 @@ pnpm typecheck
 pnpm build
 ```
 
+```bash
+node scripts/make-icons.mjs
+```
+
+Redraws the app icons in `public/` from the brand mark. They are committed, so this
+only needs running if the mark changes.
+
 ## Design decisions
 
-**No price API.** Metal prices are typed in by the student. Fetching them would make
-the app need a network and a key, and — worse — would make a number that must be
-correct on the day look like it had been handled for you. Typing it in keeps the
-responsibility where it belongs, and the app works offline.
+**No price API.** Metal prices, exchange rates and token values are typed in by the
+student. Fetching them would make the app need a network and a key, and — worse —
+would make a number that must be correct on the day look like it had been handled for
+you. Typing it in keeps the responsibility where it belongs, and the app works
+offline.
+
+**Statements are parsed on the device.** There is no upload endpoint and there should
+never be one. A bank statement is the most revealing document most students own, and
+the app that reads it has no business keeping a copy. A PDF is the one format it
+refuses, because reading one would mean sending it somewhere to be converted; it asks
+for the table to be pasted instead.
+
+**Nothing in a foreign currency is counted until you give it a rate.** A holding with
+no rate is left out of the total and said so, loudly, rather than being dropped
+quietly or treated as naira. Zakat that comes out too low is the failure that matters
+here, so the app would rather be visibly incomplete than quietly wrong.
+
+**An overdraft is a debt, not a negative balance.** Netting it off the assets would
+silently reduce the zakat owed, so overdrawn accounts are deducted as debts where the
+student can see them.
+
+**Bank connections are off unless configured.** They are the only part of this app
+that touches a network, and the only part that cannot be done on the device: open
+banking needs a secret key held by a server. With no key configured — the default, and
+what you get running this locally — the connector shows itself as unavailable and
+points at statement upload, which reaches the same number without a bank login leaving
+the device. See `lib/sources/connect/` and `app/api/bank/exchange`.
+
+**It installs, and works with no signal.** A student working out their zakat is often
+on a rationed data bundle and campus wifi that comes and goes. The service worker in
+`public/sw.js` caches the app shell and never, under any circumstance, caches anything
+under `/api` — the only thing there is a bank balance.
 
 **The result always shows its working.** Total assets, debts deducted, net wealth and
 the nisab figure are all displayed, so the student can show somebody qualified how the

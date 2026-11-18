@@ -59,7 +59,7 @@ export interface ZakatInput {
   readonly assets: Assets;
   readonly liabilities: Liabilities;
   readonly nisabBasis: NisabBasis;
-  /** Price per gram, in naira, as the student looked it up today. */
+  /** Price per gram, in the home currency, as the person looked it up today. */
   readonly goldPricePerGram: number;
   readonly silverPricePerGram: number;
   readonly useSolarYearRate?: boolean;
@@ -143,4 +143,17 @@ export function formatNaira(amount: number): string {
     currency: "NGN",
     maximumFractionDigits: 0,
   }).format(Math.round(amount));
+}
+
+/** Any currency, whole units. formatNaira is this with "NGN". */
+export function formatIn(amount: number, currency: string): string {
+  try {
+    return new Intl.NumberFormat(currency === "NGN" ? "en-NG" : undefined, {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    }).format(Math.round(amount));
+  } catch {
+    return `${Math.round(amount).toLocaleString()} ${currency}`;
+  }
 }

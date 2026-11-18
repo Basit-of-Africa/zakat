@@ -46,8 +46,20 @@ what goes wrong if a student subtracts a whole student loan. Write that kind.
 which is why it can be tested without a browser. React state lives in `app/` and
 `components/`.
 
-**No network calls.** Not for prices, not for anything. This is a hard rule — see the
-README for why.
+**No network calls, with one named exception.** Not for prices, not for exchange
+rates, not for token values — all of those are typed in by the student. Statements are
+parsed in the browser and never uploaded; there is no endpoint that accepts one and
+there should never be one.
+
+The exception is `lib/sources/connect/`, which holds the bank and wallet connectors,
+and `app/api/bank/exchange`, the single server route they need. Open banking cannot be
+done on the device: it works by an aggregator holding a secret key, and a secret key
+in a browser is not a secret. So those connectors are off unless somebody deploying
+this app configures them, every one of them states in `networkNote` exactly what
+leaves the device, and that sentence is shown to the student before they connect.
+
+If you are adding anything that touches a network, it belongs in that folder, behind
+that interface, with that note — or it does not belong here at all.
 
 ## Tests
 
@@ -55,6 +67,17 @@ Anything in `lib/` needs a test, and the arithmetic ones should read as statemen
 about money: `"returns exactly zero below nisab, not a small number"`. Edge cases
 worth covering in anything you add: exactly at the threshold, negative net wealth, and
 zero.
+
+Statement parsing has its own edge cases, and they are the ones that produce a
+confident wrong number rather than an obvious one: `1,234` against `12.345,67`,
+`03/04/2025` against `04/03/2025`, an export ordered newest-first, a file with
+transactions but no balance. There are fixtures for each in
+`lib/sources/statement/`; add one when you add a bank.
+
+`lib/sw.test.ts` loads `public/sw.js` into a sandbox with a fake cache and a fake
+network. It exists for one rule — the bank response is never written to a cache — and
+that rule cannot be checked by reading the file, so do not delete the test when you
+change the worker.
 
 ```bash
 pnpm test
